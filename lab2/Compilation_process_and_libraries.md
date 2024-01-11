@@ -179,4 +179,22 @@ Your second task is to identify all C runtime libraries in your development setu
   - Debian Bullseye (glibc version 2.31)?
   - Debian Buster (glibc version 2.28)?
 
+You surely get perplexed with all different paths and library versions. To nail the findings to reality, you can always ask chatGPT to create a C program that prints out both compile-time and run-time glibc versions... for your convenience find the code below, and test it both with native and cross-compilation.
+```c
+#include <stdio.h>
+#include <gnu/libc-version.h>
+
+int main() {
+    // Print compile-time version
+    printf("Compile-time glibc version: %d.%d\n", __GLIBC__, __GLIBC_MINOR__);
+
+    // Print runtime version
+    printf("Runtime glibc version: %s\n", gnu_get_libc_version());
+
+    return 0;
+}
+
+```
+
+
 Reflection: What are the key benefits of cross-development setup?
