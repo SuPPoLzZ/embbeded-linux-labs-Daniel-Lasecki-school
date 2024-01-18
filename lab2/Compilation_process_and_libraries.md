@@ -175,7 +175,7 @@ Your second task is to identify all C runtime libraries in your development setu
   - Build-time library (in VM)
   - Run-time library (in raspi)
   - Debug library (in VM)
-- Glibc library is downwards compatible. Can you be sure that executables built on this setup and target Debian Bookworm will run on
+- libc library is downwards compatible. Can you be sure that executables built on this setup and target Debian Bookworm will run on
   - Debian Bullseye (glibc version 2.31)?
   - Debian Buster (glibc version 2.28)?
 
