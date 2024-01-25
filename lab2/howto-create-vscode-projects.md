@@ -106,5 +106,8 @@ You should now be able to do cross-builds and remote debugging with the new proj
 Note that key shortcut are different for CMake projects:  
 `F7` to build (especially note that Shift-Ctrl-B builds with wrong parameters... annoying)  
 `F5` to debug
-
+> For these to work, vscode needs to work in folder ~/embedded-linux-labs/lab2 or whatever is the place for your current project. This you can do either  
+> a) by starting vscode from command line, like in `student@student-VirtualBox:~/embedded-linux-labs/lab2$ code .` or  
+> b) using vscode menu File -- Open Folder to choose current project  
+> Additionally, you should enable git setting "Open Repository in Parent Folders" to enable fluent git usage from current project folder
 
