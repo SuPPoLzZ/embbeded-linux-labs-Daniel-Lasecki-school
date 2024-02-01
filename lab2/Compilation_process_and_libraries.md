@@ -163,7 +163,7 @@ end
 Your first task is to study what shared libraries your executable "lab2" requires, and return your findings as text document in your repository `embedded-linux-labs/lab2/libraries.md` (have a quick look at markdown format while doing this, you have examples all around the repository!)
 - where is your executable located in VM, and where in raspi is it copied to?
 - use `file` command to check for what architecture the executable was built for
-- use `ldd` command to find out what shared runtime libraries your executable requires
+- use `ldd` command to find out what shared runtime libraries your executable requires (you need to run this in environment that supports the architecture of previous step!)
 
 Your second task is to identify all C runtime libraries in your development setup (VM and raspi), and return your findings in the same text document in your repository `embedded-linux-labs/lab2/libraries.md`
 - Find all files named `libc.so.6` in both systems VM and raspi (use `find` command; use `sudo` to extend the search to all directories, do net search to get command parameters right)
@@ -171,15 +171,16 @@ Your second task is to identify all C runtime libraries in your development setu
   - file path
   - library architecture (use `file` as in cli commands above; you may need to follow symlinks) 
   - library version (use `strings` as in cli commands above)
+  - (you could skip all paths with `snap`: they are certainly snap packet manager environments completely unrelated to cross-compilation)
 - Identify (file path and version) the three libraries in cross-development diagram above:
-  - Build-time library (in VM)
-  - Run-time library (in raspi)
-  - Debug library (in VM)
+  - Build-time library (in VM, see note 1 below)
+  - Run-time library (in raspi, see note 1 below)
+  - Debug library (in VM, see note 2 below)
 - libc library is downwards compatible. Can you be sure that executables built on this setup and target Debian Bookworm will run on
   - Debian Bullseye (glibc version 2.31)?
   - Debian Buster (glibc version 2.28)?
 
-You surely get perplexed with all different paths and library versions. To nail the findings to reality, you can always ask chatGPT to create a C program that prints out both compile-time and run-time glibc versions... for your convenience find the code below, and test it both with native and cross-compilation.
+**Note 1**: You surely get perplexed with all different paths and library versions. To nail the findings to reality, you can always ask chatGPT to create a C program that prints out both compile-time and run-time glibc versions... for your convenience find the code below, and test it both with native and cross-compilation.
 ```c
 #include <stdio.h>
 #include <gnu/libc-version.h>
@@ -195,6 +196,8 @@ int main() {
 }
 
 ```
+
+**Note2**: Once you have started a debug session with GDB (connected to the remote GDB server), you can examine the libraries loaded by the process being debugged. Use the `info sharedlibrary` command in GDB. This will list all shared libraries used by the process, including libc. How to get access to gdb? Start a debugging session and wait for the debugger to stop on first code line, then select "debug console" tab next to terminal tab. There you should see from where the symbols were loaded, and additionally you can use `-exec info sharedlibrary` to list all libraries again.
 
 
 Reflection: What are the key benefits of cross-development setup?
