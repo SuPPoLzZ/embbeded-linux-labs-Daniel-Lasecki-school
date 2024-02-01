@@ -1,3 +1,5 @@
+#Filtering noise on signal lines
+
 In case the signals from the rotary encoder are very noisy, like in the figure 1 below, some clean-up is needed.
 
 ![Noisy signal](Images/noisy_signal.jpg)
