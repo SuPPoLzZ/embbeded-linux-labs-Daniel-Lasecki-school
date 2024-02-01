@@ -8,8 +8,10 @@ In this lab you will combine the pieces developed so far. Your task is to develo
     
 - The operating mode of the device is selected with a button. The current operating mode is indicated with a (single colour) LED (LED1). 
     
-- When the device is in LED dimmer-mode, a rotary switch or a rotary encoder is used to increase and decrease the intensity (brightness) of the (single colour) LED (LED2). The brightness saturates at 100% when increasing it, and at 0% when decreasing it (in other words, it does not wrap over) 
-    
+- When the device is in LED dimmer-mode, a rotary switch or a rotary encoder  is used to increase and decrease the intensity (brightness) of the (single colour) LED (LED2). The brightness saturates at 100% when increasing it, and at 0% when decreasing it (in other words, it does not wrap over) 
+	- Data sheet of a rotary switch: [SRBM-1371018.pdf](Data_Sheets/SRBM-1371018.pdf)
+	- Data sheet of a rotary encoder: [Rotary_Encoder.pdf](Data_Sheets/Rotary_Encoder.pdf)
+
 - When the device is in servo-control-mode the dimmable LED (LED2) retains its brightness, and the knob controls the servo position instead. Saturation as in LED dimmer mode. 
     
 
