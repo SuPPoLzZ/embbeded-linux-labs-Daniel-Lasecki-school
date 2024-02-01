@@ -66,7 +66,7 @@ First, build a hardware having a push button and leds (like in the figure belo
 | GREEN_PIN | 25 |
 
 
-![[Images/Pasted image 20240201104723.png]]
+![Example circuit](Images/example_circuit.png)
 
 Add  event_test_without_threads.c to your project and compile it. It should work out of the box, just make sure that you don't have several main()-functions in your active source code files. Observe the blocking nature of the code: The led changes state only after a time out or a button event has occurred. 
 
