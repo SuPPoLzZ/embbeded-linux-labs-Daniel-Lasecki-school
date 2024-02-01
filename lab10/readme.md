@@ -212,23 +212,45 @@ python ruuvitag-listen.py -b 10.99.40.186 -t sensors/test
 The code should produce mqtt messages with this format
 
 ```
-[{
-    "temperature": msg.payload.data_temperature,
-    "humidity": msg.payload.data_humidity,
-    "pressure": msg.payload.data_pressure,
-    "rssi": msg.payload.data_rssi,
-    "acceleration_x": msg.payload.data_acceleration_x,
-    "acceleration_y": msg.payload.data_acceleration_y,
-    "acceleration_z": msg.payload.data_acceleration_z,
-    "battery": msg.payload.data_battery
-},
 {
-    "tag1": msg.payload.mac,
-    "tag2": msg.payload.data_mac
-}]
+  "mac": "E0:75:5D:F3:C3:C7", 
+  "data_data_format": 5, 
+  "data_humidity": 30.02, 
+  "data_temperature": 18.02, 
+  "data_acceleration": 1022.7648801166375, 
+  "data_acceleration_x": 52, 
+  "data_acceleration_y": 288, 
+  "data_acceleration_z": 980, 
+  "data_tx_power": 4, 
+  "data_battery": 2939, 
+  "data_movement_counter": 248, 
+  "data_measurement_sequence_number": 11630, 
+  "data_mac": "e0755df3c3c7", 
+  "data_rssi": -60
+}
 ```
 
-Your task is to configure node-red 'change' block to distribute that data for influx, so that the variables can be plotted individually. You can filter the data using tags, so that only selected Ruuvitag data is shown (in case there are multiple ruuvitags in the classroom) 
+In change block you need to reformat that into this for influxdb:
+```
+[{ 
+  "humidity": 30.02, 
+  "temperature": 18.02, 
+  "acceleration": 1022.7648801166375, 
+  "acceleration_x": 52, 
+  "acceleration_y": 288, 
+  "acceleration_z": 980, 
+  "tx_power": 4, 
+  "battery": 2939, 
+  "movement_counter": 248, 
+  "measurement_sequence_number": 11630,  
+  "rssi": -60
+},
+{
+  "tag1": "E0:75:5D:F3:C3:C7",
+  "tag2": "e0755df3c3c7"
+}]
+```
+Using tags allow selecting data from single sensor only for a graph (otherwise all temperatures from all sensors appear in same graph). 
 
 # 4 Adding actions
 
