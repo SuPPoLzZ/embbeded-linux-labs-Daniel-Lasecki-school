@@ -229,3 +229,9 @@ The code should produce mqtt messages with this format
 ```
 
 Your task is to configure node-red 'change' block to distribute that data for influx, so that the variables can be plotted individually. You can filter the data using tags, so that only selected Ruuvitag data is shown (in case there are multiple ruuvitags in the classroom) 
+
+# 4 Adding actions
+
+Next, create a system that keeps listening data from a ruuvitag, and in node-red it shall detect z-acceleration changes and turn on/off a led accordingly (via mqtt). In other words, turning the ruuvitag upside down shall toggle led state.  
+
+This you shall implement using the ruuvitag code above, and your mqtt client controlling a led (C language or python).
