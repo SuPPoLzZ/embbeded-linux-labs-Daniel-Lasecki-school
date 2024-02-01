@@ -126,3 +126,4 @@ system("gpioget --bias=pull-up gpiochip0 22");
  
 Place this after you have configured the line as an input ( with gpiod_chip_get_line() -function call ) 
  
+**Note: **It seems that the functionality of the pull-up -resistor has some issues on some Raspberry Pi's. Before this  has been solved, use external pull-up resistor for button input.
