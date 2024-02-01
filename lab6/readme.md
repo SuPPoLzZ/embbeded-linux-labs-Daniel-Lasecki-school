@@ -1,3 +1,53 @@
-For the time being, instructions for Lab6 are found from OneNote, link below:
+# The Multi-purpose knob
 
-https://tuas365.sharepoint.com/sites/EmbeddedLinux/_layouts/15/Doc.aspx?sourcedoc={b2c2950f-461f-44f0-9e2b-078b6b2c7c9d}&action=edit&wd=target%28_Content%20Library%2FLab%20instructions.one%7C42607d48-00a8-4794-be2f-8e7d123bc79e%2FLAB5%20-%20Using%20interrupts%20with%20GPIO%7C04df5e00-3cab-4a43-8e55-ad7f3c2f7aa5%2F%29&wdorigin=703
+### The specs
+
+In this lab you will combine the pieces developed so far. Your task is to develop a multi-purpose controller with the following functionality: 
+
+- The device has two operating modes (states): a LED dimmer and a servo controller 
+    
+- The operating mode of the device is selected with a button. The current operating mode is indicated with a (single colour) LED (LED1). 
+    
+- When the device is in LED dimmer-mode, a rotary switch or a rotary encoder is used to increase and decrease the intensity (brightness) of the (single colour) LED (LED2). The brightness saturates at 100% when increasing it, and at 0% when decreasing it (in other words, it does not wrap over) 
+    
+- When the device is in servo-control-mode the dimmable LED (LED2) retains its brightness, and the knob controls the servo position instead. Saturation as in LED dimmer mode. 
+    
+
+### Things to consider: 
+
+In earlier labs you have already used hardware PWM.  Configure RasPi so that it takes another HW PWM into use (see instructions of lab 4.2 :  [https://blog.oddbit.com/post/2017-09-26-some-notes-on-pwm-on-the-raspb/](https://blog.oddbit.com/post/2017-09-26-some-notes-on-pwm-on-the-raspb/) ). 
+
+The PWM rate (the PWM frequency) for the LED should be high enough – otherwise there will be visible flickering. Experiment with different frequencies. Where is the limit of visible flicker? 
+
+In essence, you need to create an up-down-counter, which is then controlled by the event handlers (up and down events). Also, the "select"-button needs an event handler. To maintain the states of led, servo and mode selection, you might need to use global variables (which are generally ugly).... or static variables inside functions, which are pretty cool. Have a look at this article: [https://www.geeksforgeeks.org/static-variables-in-c/](https://www.geeksforgeeks.org/static-variables-in-c/) 
+
+The rotary switch is "easy to use", but has really bad switch bouncing, which you need to take care of properly. The rotary encoder is slightly more complex to use, but it has an in-built button (press the shaft). You can use either. Even both, if you want. 
+
+The rotary encoder suffers (occasionally) from noise issues, causing very unreliable and indeterministic operation. Long power lines and long signal wires will make noise issues more severe and sometimes it is necessary to solve these issues with hardware. See:  
+
+## Bonus task (a bit tricky one): 
+
+Replace the single-colour led with a RGB –led. Not just any RGB-led, but this one:  [https://www.triopak.fi/fi/tuote/WS2812D-F5-SH](https://www.triopak.fi/fi/tuote/WS2812D-F5-SH) 
+
+![[WS2812.png]]
+
+Data sheet here: [WS2812D-F5.pdf](https://tuas365.sharepoint.com/:b:/r/sites/EmbeddedLinux/Class%20Materials/Data%20Sheets/WS2812D-F5.pdf?csf=1&web=1&e=yXdAeN) 
+
+This type of LEDs are extensively used in decorative lighting, like Christmas lights, led strips etc.  
+
+In order to use these, you need to have a driver. The protocol these "addressable" LEDs are using, is based on coding, where '0' and '1' bits are coded with different pulse length. 
+
+Note that there are multiple ways to generate such pulse sequence: 
+
+- Using the SPI driver (Hardware, MOSI only)     
+- Using the I2C driver (Hardware, SDA only)     
+- Using PWM (Hardware)     
+- Bit banging (Plain SW-controlled GPIO-output, loads CPU the most) 
+    
+
+Here are some (not directly working) solutions to start with: 
+
+[https://microcontrollerslab.com/ws2812b-rgb-led-pinout-working-interfacing-arduino-applications/](https://microcontrollerslab.com/ws2812b-rgb-led-pinout-working-interfacing-arduino-applications/) 
+
+[https://github.com/qmk/qmk_firmware/blob/master/docs/ws2812_driver.md](https://github.com/qmk/qmk_firmware/blob/master/docs/ws2812_driver.md)
+
