@@ -56,14 +56,15 @@ Before jumping into that, there is another, bigger problem to solve: The functio
 Above we discussed that gpiod_line_event_wait()  is blocking. This means that the main program execution will stay in the wait loop (that is, the execution of the next code lines is blocked), until an event or timeout occurs.   
 
 First, build a hardware having a push button and leds (like in the figure below). The pins for the button and leds are:  
- 
-|**Signal**|**GPIO**|
-|BUTTON_PIN|22|
-|RED_PIN|23|
-|YELLOW_PIN|24|
-|GREN_PIN|25| 
 
-![[Pasted image 20240201104723.png]]
+
+| **Signal** | **GPIO** |
+| ---- | ---- |
+| BUTTON_PIN | 22 |
+| RED_PIN | 23 |
+| YELLOW_PIN | 24 |
+| GREEN_PIN | 25 |
+![[Images/Pasted image 20240201104723.png]]
 
 Add  event_test_without_threads.c to your project and compile it. It should work out of the box, just make sure that you don't have several main()-functions in your active source code files. Observe the blocking nature of the code: The led changes state only after a time out or a button event has occurred. 
 
