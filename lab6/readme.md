@@ -23,15 +23,16 @@ In essence, you need to create an up-down-counter, which is then controlled by t
 
 The rotary switch is "easy to use", but has really bad switch bouncing, which you need to take care of properly. The rotary encoder is slightly more complex to use, but it has an in-built button (press the shaft). You can use either. Even both, if you want. 
 
-The rotary encoder suffers (occasionally) from noise issues, causing very unreliable and indeterministic operation. Long power lines and long signal wires will make noise issues more severe and sometimes it is necessary to solve these issues with hardware. See:  
+The rotary encoder suffers (occasionally) from noise issues, causing very unreliable and indeterministic operation. Long power lines and long signal wires will make noise issues more severe and sometimes it is necessary to solve these issues with hardware. See: 
+[Filtering noise on signal lines](lab6/Filtering_noise_on_signal_lines.md) 
 
 ## Bonus task (a bit tricky one): 
 
 Replace the single-colour led with a RGB –led. Not just any RGB-led, but this one:  [https://www.triopak.fi/fi/tuote/WS2812D-F5-SH](https://www.triopak.fi/fi/tuote/WS2812D-F5-SH) 
 
-![[WS2812.png]]
+![WS2812 RGB LED](Images/WS2812.png)
 
-Data sheet here: [WS2812D-F5.pdf](https://tuas365.sharepoint.com/:b:/r/sites/EmbeddedLinux/Class%20Materials/Data%20Sheets/WS2812D-F5.pdf?csf=1&web=1&e=yXdAeN) 
+[Data sheet of WS2812D](WS2812D-F5.pdf)
 
 This type of LEDs are extensively used in decorative lighting, like Christmas lights, led strips etc.  
 

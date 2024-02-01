@@ -9,7 +9,7 @@ A much more effective way is to use external GPIO interrupts. In lab3 you have a
 
 You can use lab3 as a basis (but create a new project, lab5), get main.c from libgpiod-example/libgpiod-event to your src-directory under lab5 and run it terminal in raspi. You can still build/launch it from debugger, but then stop it, ssh to raspi and execute lab5 binary there.  
 
-To set up the input-pin, see this: [Configuring the input pin to have internal pull-up](onenote:#Configuring%20the%20input%20pin%20to%20have%20internal%20pull-up%20&section-id={42607d48-00a8-4794-be2f-8e7d123bc79e}&page-id={63d43431-5986-4f9d-8f6e-b440c37987ef}&end)   ([Web view](https://tuas365.sharepoint.com/sites/EmbeddedLinux/_layouts/15/Doc.aspx?sourcedoc={b2c2950f-461f-44f0-9e2b-078b6b2c7c9d}&action=edit&wd=target%28_Content%20Library%2FLab%20instructions.one%7C42607d48-00a8-4794-be2f-8e7d123bc79e%2FConfiguring%20the%20input%20pin%20to%20have%20internal%20pull-up%20%7C63d43431-5986-4f9d-8f6e-b440c37987ef%2F%29&wdorigin=703&wdpreservelink=1))  
+To set up the input-pin, see this: [Configuring the input pin to have internal pull-up](/lab3/configuring-gpio-pin-pullup.md)   
 
 Observe the behavioural.  
 
