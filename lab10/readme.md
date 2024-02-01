@@ -1,9 +1,8 @@
-
 # 1 Introduction
 
 In this laboratory exercise you will create a complete IoT solution for collecting sensor data and storing it to a database, and finally visualizing the data.
 
-![[Pasted image 20240201102414.png]]
+![blockdiagram](Images/blockdiagram.png)
 
 In this lab you will install and run docker containers that provide the necessary services:
 ·       **Mqtt broker** is a publish-subscribe message bus which is typical solution in IoT systems. Sensors publish mqtt messages and those messages can be then received by data consumers, by subscribing to a message topic.
@@ -35,7 +34,7 @@ c)    In the menu select the following components:
 ·       When you select Node-RED component you will get error ‘**’addons_list.yml does not exist**’’. For the NodeRed options choose ‘**’Select & build addon list**’’. Just accept the preselected addons and go back to previous menu.
 ·       When all the components **Grafana**, **InfluxDB**, **Mosquitto**, **Node-RED** and **Portainer-CE** are selected, press **Enter** to build the docker-compose.yml file.
 
-  ![[Pasted image 20240201102914.png]]
+  ![configmenu](Images/config-menu.png)
   
 
 ## 2.2 Starting up the IoT Stack
@@ -47,7 +46,7 @@ docker-compose up -d
 docker-compose ps
 ```
 
-![[Pasted image 20240201103002.png]]
+![dockerps](Images/docker-ps.png)
 
 ## 2.3 Create the InfluxDB database
 
@@ -117,7 +116,7 @@ to start the mqtt-simulator docker container. To check that simulator configurat
 docker ps
 ```
 that shows all running containers including mqtt-simulator:
-![[Pasted image 20240201104156.png]]
+![dockerps2](Images/docker-ps-2.png)
   
 **Troubleshooting**: If you do not see mqtt-simulator in that list, see docker logs for that failed container (get your container id like 02a5ca33da0de1d3082bca172c4d1ae2ecf773483e98c7e052252af1113ded7c from “docker run” response in earlier step):  
 **docker logs [your-container-id]**
@@ -139,7 +138,7 @@ a)    In web browser go to **http://[your-localhost-ip]:1880**
 
 b)     This will open Node-Red configuration page. Close the welcome message. On the left side there is a set nodes.  
 Add nodes **mqtt in**,  **change** and **influxdb out**  to the chart, and connect them.
-![[Pasted image 20240201104559.png]]
+![noderedstart](Images/nodered-start.png)
 
 c)    Configure **mqtt in** with your actual raspi ip, to subscribe to topic you configured in the simulator.
 
@@ -150,7 +149,7 @@ d)    To check that your mqtt in node works ok and is correctly connected to 
 3.     Choose debug tab on right pane as shown below
 4.     Verify there is new data coming in every 5 seconds (if not, check the previous setup steps)
 
-  ![[Pasted image 20240201104833.png]]
+  ![nodered-debug](Images/nodered-debug.png)
   
 e)   Configure the **change** node to reformat payload for influxdb. Use **expression** as below
   
@@ -189,7 +188,7 @@ c)     Next you will create a dashboard. Navigate to the upper left corner a
 To verify there is now simulated data flowing from simulator to nodered and to influx database, lets check do we see the new data in influxdb:  
 Use  
 **docker exec -it influxdb influx**command to get inside InfluxDB docker container terminal. Then use **USE sensor_data** command, use **show measurements** command and **select * from sensor_data** commands respectively and there should be some data in the database.
-![[Pasted image 20240201105720.png]]
+![influxdbdata](Images/influxdb-data.png)
 Use **quit** command to exit the InfluxDB container terminal.
 
 In grafana GUI view click  **+ Create Dashboard** and then add a new visualization. In **Select data source** tab select **InfluxDB**.
