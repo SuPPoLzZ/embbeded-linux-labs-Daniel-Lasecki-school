@@ -197,3 +197,35 @@ At the bottom of the page there is the options. Click the **select measurement**
 
 You should then start seeing the data on dashboard.
 
+# 3 Getting physical sensor data to the stack
+
+The inbuilt problem with containers (for embedded designers) is that containers are very well isolated from the platform. This of course allows easy portability, cloning, server farms and stuff, but if you want to get access to hardware that is not easy. To keep things easy, your containers should only communicate via tcp/ip ports. If you need access to hardware, you run that part of code on the platform or host os, and send data via mqtt or rest api to containers.  
+
+Next you will demonstrate getting Ruuvitag data to your IoT stack. Ruuvitag is a Bluetooth LE device sending temperature etc information.  
+
+The example python code in this lab needs mqtt broker ip and mqtt topic as parameters, like in below (replace ip with your raspi ip)
+
+```
+python ruuvitag-listen.py -b 10.99.40.186 -t sensors/test
+```
+
+The code should produce mqtt messages with this format
+
+```
+[{
+    "temperature": msg.payload.data_temperature,
+    "humidity": msg.payload.data_humidity,
+    "pressure": msg.payload.data_pressure,
+    "rssi": msg.payload.data_rssi,
+    "acceleration_x": msg.payload.data_acceleration_x,
+    "acceleration_y": msg.payload.data_acceleration_y,
+    "acceleration_z": msg.payload.data_acceleration_z,
+    "battery": msg.payload.data_battery
+},
+{
+    "tag1": msg.payload.mac,
+    "tag2": msg.payload.data_mac
+}]
+```
+
+Your task is to configure node-red 'change' block to distribute that data for influx, so that the variables can be plotted individually. You can filter the data using tags, so that only selected Ruuvitag data is shown (in case there are multiple ruuvitags in the classroom) 
