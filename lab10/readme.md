@@ -4,11 +4,11 @@ In this laboratory exercise you will create a complete IoT solution for collecti
 
 ![blockdiagram](lab10/Images/blockdiagram.png)
 
-In this lab you will install and run docker containers that provide the necessary services:
-·       **Mqtt broker** is a publish-subscribe message bus which is typical solution in IoT systems. Sensors publish mqtt messages and those messages can be then received by data consumers, by subscribing to a message topic.
-·       **Node-RED** is a no-code solution for message processing and system logic, allowing for example triggering alarms at specified sensor reading levels.
-·       **Infludb** is a database optimized for time series data (time stamped value sequence), for example sensor data.
-·       **Grafana** is a web server that provides visualizations of data. In this setup it gets the simulated temperature data from influx database and draws a time graph.
+In this lab you will install and run docker containers that provide the necessary services:  
+·       **Mqtt broker** is a publish-subscribe message bus which is typical solution in IoT systems. Sensors publish mqtt messages and those messages can be then received by data consumers, by subscribing to a message topic.  
+·       **Node-RED** is a no-code solution for message processing and system logic, allowing for example triggering alarms at specified sensor reading levels.  
+·       **Infludb** is a database optimized for time series data (time stamped value sequence), for example sensor data.  
+·       **Grafana** is a web server that provides visualizations of data. In this setup it gets the simulated temperature data from influx database and draws a time graph.  
 
 > Docker containers are lightweight, standalone packages that contain everything needed to run a specific software, including the code, runtime, system tools, libraries, and settings. They are isolated from each other and the host system, ensuring that software runs consistently across different computing environments. Docker containers are created from images that specify their precise contents, and they can be easily shared, deployed, and scaled, making them popular for streamlining the development, testing, and deployment processes of applications.
 
@@ -30,9 +30,9 @@ b)     Once Raspberry Pi has rebooted, navigate into /IOTstack folder and op
 
 c)    In the menu select the following components:  
 **Grafana**, **InfluxDB**, **Mosquitto**, **Node-RED** and **Portainer-CE**:  
-·       Menu response is not fast, so **do not keep arrow button pressed**: it will not go faster, but only fills the keypress buffer so you will need to wait until buffer is empty before next presses.
-·       When you select Node-RED component you will get error ‘**’addons_list.yml does not exist**’’. For the NodeRed options choose ‘**’Select & build addon list**’’. Just accept the preselected addons and go back to previous menu.
-·       When all the components **Grafana**, **InfluxDB**, **Mosquitto**, **Node-RED** and **Portainer-CE** are selected, press **Enter** to build the docker-compose.yml file.
+·       Menu response is not fast, so **do not keep arrow button pressed**: it will not go faster, but only fills the keypress buffer so you will need to wait until buffer is empty before next presses.  
+·       When you select Node-RED component you will get error ‘**’addons_list.yml does not exist**’’. For the NodeRed options choose ‘**’Select & build addon list**’’. Just accept the preselected addons and go back to previous menu.  
+·       When all the components **Grafana**, **InfluxDB**, **Mosquitto**, **Node-RED** and **Portainer-CE** are selected, press **Enter** to build the docker-compose.yml file.  
 
   ![configmenu](lab10/Images/config-menu.png)
   
