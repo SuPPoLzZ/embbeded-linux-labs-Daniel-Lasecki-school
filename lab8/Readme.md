@@ -11,14 +11,13 @@ In this lab you'll set up web server for a single local user.
 
 As always, you'll want to start with an up-to-date RasPi system. Open up a ssh connection, update (rememeber to keep development environment up-to-date as well!)
 ```
-pi@raspberrypi:~ $ sudo apt update
-pi@raspberrypi:~ $ sudo apt upgrade
-pi@raspberrypi:~ $ sudo apt install lighttpd
+pi@rpi0:~ $ sudo apt update
+pi@rpi0:~ $ sudo apt upgrade
+pi@rpi0:~ $ sudo apt install lighttpd
 
-student@student-VirtualBox:~$ sudo sbuild-apt rpizero-bullseye-armhf apt-get update
-student@student-VirtualBox:~$ sudo sbuild-apt rpizero-bullseye-armhf apt-get upgrade
-student@student-VirtualBox:~$ sudo sbuild-apt rpizero-bullseye-armhf apt-get install gpiod
-
+student@student-VirtualBox:~$ sudo sbuild-apt rpi3-bookworm-armhf apt-get update
+student@student-VirtualBox:~$ sudo sbuild-apt rpi3-bookworm-armhf apt-get upgrade
+student@student-VirtualBox:~$ sudo sbuild-apt rpi3-bookworm-armhf apt-get install lighttpd
 ```
 
 The installation will get everything done: install necessary files with basic configuration, start the service, and enable the service so that it will start after next reboot as well.
