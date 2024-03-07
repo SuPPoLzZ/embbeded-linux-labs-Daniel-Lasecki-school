@@ -22,13 +22,21 @@ Replace default assignments in `/etc/lighttpd/conf-enabled/10-cgi.conf` with
 
 Copy example pydemo.py file from this repository into `/usr/lib/cgi-bin/pydemo.py` 
 
+> By default, lighttpd uses HTTP/2 connections but does not mage them well, so you might get error when using https connections. To avoid that you can disable the HTTP/2 support in main configuration file
+
+```
+server.feature-flags       += ("server.h2proto" => "disable")
+server.feature-flags       += ("server.h2c"     => "disable")
+
+```
 Finally, reload:
 ```
 pi@raspberrypi:~ $ sudo service lighttpd force-reload
 ```
 and check operation with browser `https:/xx.xx.xx.xx/cgi-bin/pydemo.py`.  
-Troubleshooting: If 500 internal server error, check that you really can run the python code: `python /usr/lib/cgi-bin/pydemo.py` 
-Note that every time you change the content of cgi-bin contents, you must reload configuation before changes take effect! In contrast, if you change statically server file content, reload is not required.
+> Troubleshooting: 
+> If 500 internal server error, check that you really can run the python code: `python /usr/lib/cgi-bin/pydemo.py` and also directly as `/usr/lib/cgi-bin/pydemo.py` so the file need to be executable (x flag set)  
+Note that every time you change the content of cgi-bin contents, you must reload configuration before changes take effect! In contrast, if you change statically server file content, reload is not required.
 
 QUESTION 1: Get your python page content to a file in VM using `curl` and and redirect the output to lab9/results/mypython.html, commit and push. 
 
