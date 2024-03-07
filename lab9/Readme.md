@@ -22,7 +22,7 @@ Replace default assignments in `/etc/lighttpd/conf-enabled/10-cgi.conf` with
 
 Copy example pydemo.py file from this repository into `/usr/lib/cgi-bin/pydemo.py` 
 
-> By default, lighttpd uses HTTP/2 connections but does not mage them well, so you might get error when using https connections. To avoid that you can disable the HTTP/2 support in main configuration file
+By default, lighttpd uses HTTP/2 connections but does not manage them well, so you might get error when using https connections. To avoid that you can disable the HTTP/2 support in main configuration file by replacing the contents as
 
 ```
 server.feature-flags       += ("server.h2proto" => "disable")
@@ -34,17 +34,22 @@ Finally, reload:
 pi@raspberrypi:~ $ sudo service lighttpd force-reload
 ```
 and check operation with browser `https:/xx.xx.xx.xx/cgi-bin/pydemo.py`.  
-> Troubleshooting: 
-> If 500 internal server error, check that you really can run the python code: `python /usr/lib/cgi-bin/pydemo.py` and also directly as `/usr/lib/cgi-bin/pydemo.py` so the file need to be executable (x flag set)  
-Note that every time you change the content of cgi-bin contents, you must reload configuration before changes take effect! In contrast, if you change statically server file content, reload is not required.
+> **Troubleshooting**:  
+> If `500 internal server error`, check that you really can run the python code: `python /usr/lib/cgi-bin/pydemo.py` and also directly as `/usr/lib/cgi-bin/pydemo.py` so the file need to be executable (x flag set).  
+Additionally, it is required that the binaries can run as user `www-data` which may bring new problems that are shown as internal server error. To see how your binary behaves when it is run as other user, try runuser and sort out the problems there:
+>```
+>pi@raspberrypi:~ $ sudo runuser -u www-data -- /path/to/my/binary
+>```
+Note that every time you change the content of cgi-bin contents, you must reload configuration before changes take effect! In contrast, if you change statically served html file content, reload is not required.
 
 QUESTION 1: Get your python page content to a file in VM using `curl` and and redirect the output to lab9/results/mypython.html, commit and push. 
 
 ## Step 2: Run binaries built from C code
 
-You can now copy your ledon / ledoff binaries (from lab4/4.0) to cgi-bin folder. Remember to rename them with suffix .cgi to comply with your cgi configuration. Test.
+You can now copy your ledon / ledoff binaries (from lab4/4.0) to cgi-bin folder. Remember to rename them with suffix .cgi to comply with your cgi configuration. Test. Do troubleshooting as above in python case.
 
-**NOTE** that in order to be able to play with gpio, you need to be member of gpio group. But, who is 'you' in this case? Not the user 'pi', but user 'www-data'. If you add group memberships to any user, the new settings apply only to processes started after the update --> you need to restart lighttpd process as well, so that the cgi programs can inherit gpio membership as well. 
+**NOTE** that in order to be able to play with gpio, you need to be member of gpio group. But, who is 'you' in this case? Not the user 'pi', but user 'www-data'. If you add group memberships to any user, the new settings apply only to processes started after the update --> you need to add user www-data to gpio group, and then restart lighttpd process, so that the cgi programs can inherit gpio membership. (In other words, when lighttpd service is started, it gets the current group memberships. Every time there is a web access that triggers cgi programs, a new child process is started where the program is run. That child process inherits the group memberships from parent process, so it is necessary to restart the service so that group memberships are updated to cgi scripts as well.)  
+
 
 ## Step 3: Develop CGI programs using C
 
