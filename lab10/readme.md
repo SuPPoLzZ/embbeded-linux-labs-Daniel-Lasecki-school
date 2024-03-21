@@ -202,7 +202,7 @@ You should then start seeing the data on dashboard.
 
 The inbuilt problem with containers (for embedded designers) is that containers are very well isolated from the platform. This of course allows easy portability, cloning, server farms and stuff, but if you want to get access to hardware that is not easy. To keep things easy, your containers should only communicate via tcp/ip ports. If you need access to hardware, you run that part of code on the platform or host os, and send data via mqtt or rest api to containers.  
 
-Next you will demonstrate getting Ruuvitag data to your IoT stack. Ruuvitag is a Bluetooth LE device sending temperature etc information.  
+Next you will demonstrate getting Ruuvitag data to your IoT stack. Ruuvitag is a Bluetooth LE device sending temperature etc information. Install the necessary python libararies for it into raspi https://pypi.org/project/ruuvitag-sensor/    
 
 The example python code in this lab needs mqtt broker ip and mqtt topic as parameters, like in below (replace ip with your raspi ip)
 
