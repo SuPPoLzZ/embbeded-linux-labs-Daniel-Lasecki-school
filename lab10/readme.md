@@ -71,7 +71,8 @@ a)   On terminal, navigate back to home folder and clone mqtt simulator repos
 git clone https://github.com/DamascenoRafael/mqtt-simulator
 ```
 
-b)     Navigate to /mqtt-simulator folder and type **pip3 install -r requirements.txt** to install required modules to python.
+b)    ~~Navigate to /mqtt-simulator folder and type **pip3 install -r requirements.txt** to install required modules to python.~~ 
+No need for this, since all dependencies are handled within container
 
 c)    Edit the simulator configuration  with **nano config/settings.json** command, and replace the contents of the file with the text provided here **and update the ip field to your actual raspi id**.
 
