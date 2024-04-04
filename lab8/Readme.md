@@ -53,6 +53,8 @@ Well, where is our error message? Try checking out following files, and study wh
 ```
 pi@raspberrypi:~ $ sudo systemctl status lighttpd.service
 pi@raspberrypi:~ $ sudo tail -20 /var/log/lighttpd/error.log
+pi@raspberrypi:~ $ journalctl
+# in older linux version you can see the system log with
 pi@raspberrypi:~ $ sudo tail -20 /var/log/syslog
 ```
 QUESTION 2: Where did you find information on which file and line your error was? Get the relevant error message to file errors.txt, put it into lab8/results repo path, commit and push.
