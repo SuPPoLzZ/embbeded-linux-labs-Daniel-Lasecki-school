@@ -102,7 +102,7 @@ setenv.add-response-header += (
 
 In the example above, you would allow any served script to access any IP, thus voiding the intended protection... for our demo purposes it is OK.
 
-Now using CGI means there is a new process created every second. In raspi, check CPU load (use `top` for example). Adjust the polling rate until raspi load is 20% (btw, why is it difficult to get past 25% load? You'd think 100% is possible, right?) What is the polling interval then? The script takes only integer rate values, so you need to edit the script or add more clients to the test to load the server.  
+Now using CGI means there is a new process created every second. In raspi, check CPU load (use `top` for example). **Adjust the polling rate until raspi load is 20%.** The poll rate is interger, so you need to add some more clients (client tabs in your browser). As of 4/2024 it seems that the major browsers perform some kind of tab sleeping or optimization so that the load does not increase unless you use private tabs. (btw, why is it difficult to get past 25% load? You'd think 100% is possible, right?) What is the polling interval then? 
 
 QUESTION 4: Commit your result for polling interval for 20% load to file lab9/9.4/results/load20rate.txt. Typical metric for server capacity is "handled requests per second", so you want to express the result in that quantity.
 
