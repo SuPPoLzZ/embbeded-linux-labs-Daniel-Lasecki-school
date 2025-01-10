@@ -1,5 +1,6 @@
 # RPi Cross Development
 
+Next you will study a demo project, where all source code is in your laptop (vm), and the source code is cross-built in your laptop into an ARM executable program. The ARM code is then uploaded to raspberrypi. In laptop vscode you will then start debugger, which connects to raspberrypi, starts the uploaded executable and attaches to that in order to show all the variables and program flow. All this is rather nicely automated, as you will see below.
 
 ## Setup:
 Have a Raspberry Pi with 32bit Raspbian OS (optionally Lite). If you prepare the Raspi boot SD card from image, use 'Raspberry Pi Imager' application and set the following image customisation settings before flashing:
@@ -47,7 +48,7 @@ student@student-VirtualBox:~$ cd embeddedxxx/lab2/
 student@student-VirtualBox:~/embeddedxxx/lab2$ code .
 ```
 - Open hello.c to editor (select explorer on top-left icon and click hello.c)
-- Press 'F5' key to cross-build the C code to armv6 binary, to copy the file to raspi, and to start debugger process on raspi. 
+- Press 'F5' key to cross-build the C code to armv8 binary, to copy the file to raspi, and to start debugger process on raspi. 
 A successful debug session will result in code stopped on first code line and having full visibility to all variables in code. You can now single step through the code.  
 
 Possible problem case:  
@@ -66,6 +67,7 @@ You did a test run for native compilation in lab1. Your task is to cross-compile
 - commit to local repo, and push to your TUAS gitlab repo
 
 Where is the executable located (file path) in VM and in raspi?  
+What happens if you try to run the lab2 executable in VM? Test.  
 
 After checking that you can get the debugger working proceed to [cross-compilation and libraries](Compilation_process_and_libraries.md)
 

@@ -65,7 +65,7 @@ Hello
 [Inferior 1 (process 77563) exited normally]
 (gdb)
 ```
-
+The data flow diagram below shows the two alternate cases for native compilation and running the code. In the middle we have the compilation process. The upper path shows how gdb debugger launches the executable and has access to program flow and variables. In lower path the program is run without debugger as normal application.
 
 ```mermaid
 graph LR
@@ -89,11 +89,25 @@ subgraph debug environment
 end
 ```
 
-Reflection: What are the benefits of shared libraries?
+Reflection: What are the benefits of shared libraries?  
+
+### Library management problem
+
+The flow above shows the simple case, where we use the same computer for building and running the code. In that specific case all three instances of library libc.so.6 are very likely to be exactly same, and all problems are avoided.  
+In more general case the executable is copied into another system, where library versions differ (or maybe the current OS is upgraded and libraries are also updated).  
+In larger SW system it is very likely that two applications have conflicting library version requirements.
+
+> Note that this problem usually does not exist for microcontroller architectures like bare-metal and RTOS, because there the complete system is built together, and there are no dynamically linked executables.
+
+Similar challenge applies to all systems where users can install and run applications freely. There are multiple approaches to manage this:
+- python virtual environments create isolated library environments for each python application
+- ubuntu snap applications have their libraries packaged together with the app
+- many applications are distributed as (docker) containers so thet there are no external library dependencies
+
 
 ### Cross-compilation flow (see graph below)
 
-In the case of native compilation above, the three environments (build, debug and run) are the same. The shared libraries (libc.so.6 etc) are often exactly the same library for all three usage steps: compilation-time, debugging and run-time. 
+In the above case of native compilation above, the three environments (build, debug and run) were the same. The shared libraries (libc.so.6 etc) are often exactly the same library for all three usage steps: compilation-time, debugging and run-time. 
 
 Cross-compiled executables cannot be run on development environment (x86 processor does not understand cross-compiled arm instructions; this fact is indicated with color codes in diagram below). So in cross-development environment we need to have our application and all dependent libraries for target system architecture.
 
