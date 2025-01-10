@@ -174,6 +174,8 @@ end
 
 ### Lab assignment
 
+For practical advise, be sure to read the notes at the end of this chapter.
+
 Your first task is to study what shared libraries your executable "lab2" requires, and return your findings as text document in your repository `embedded-linux-labs/lab2/libraries.md` (have a quick look at markdown format while doing this, you have examples all around the repository!)
 - where is your executable located in VM, and where in raspi is it copied to?
 - use `file` command to check for what architecture the executable was built for
