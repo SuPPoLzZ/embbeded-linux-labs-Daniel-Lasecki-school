@@ -8,11 +8,12 @@ The general process from C source to a running program has four preparation step
 
 The common tool for C compilation in Linux is `gcc`. It is user-friendly by default, and runs steps 1-3 automatically if possible. It is still necessary to understand the process, because the understanding the process makes compilation error messages more understandable.
 
-### Lab assignment:
+### Lab assignment: native build on command line:
 
+"Native" refers to setup where you build on intel processor and produce intel code, and you can run that code in the VM.
 In VM in your local repository folder (embedded-linux-labs/lab1),
-1. create a subfolder named native-build-hello and do following work in it:
-2. write tiny C application named lab1.c that prints timestamped hello message to an output file (use append)
+1. open terminal in subfolder lab1 and do following work in it:
+2. write tiny C application named lab1.c that prints timestamped hello message to an output file (use append). Can use nano editor, try "nano lab1.c"
 3. compile the code using VM native gcc (producing x86 architecture executable) `gcc lab1.c -o lab1`
 4. use command `file lab1` to check that the executable is built for x86(-64) architecture
 5. open two terminals, one with `tail -f your_output_filename` and in other you run your application.
@@ -22,3 +23,91 @@ In VM in your local repository folder (embedded-linux-labs/lab1),
 9. push local repository changes to your remote repository in TUAS gitlab 
 
 Reflection: In embedded application, why would you write application output to a file instead of just printf it to terminal? Write answer to markdown file reflection.md; commit and push.
+
+## Native C projects in vscode
+
+Next you will want to build and run the code from vscode.
+
+### Project setup (C project with one source file)
+
+A minimal setup consists of setting up two files in the project:
+- ```.vscode/tasks.json``` to define build task (build task is bound to hotkey Shift-Ctrl-B) so that gcc is invoked on currently active code tab
+- ```.vscode/launch.json``` to define debug task (F5 key) to launch gdb
+
+The base version for tasks.json
+```
+//tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileBasenameNoExtension}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+```
+If you need to add external libraries or paths, add those to argument list (remember to append a comma to previous item to keep list format valid)
+```
+                "-l", "paho-mqtt3c"
+```
+
+The base version for launch
+```
+//launch.json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "gcc - Build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}
+```
+
+In nutshell:
+- Open an empty folder for the new project (File > Open Folder...)
+- add New File (hello.c or whatever)
+- Shift-ctrl-P: C/C++: Edit Configurations (JSON)   --> creates file .vscode/c_cpp_properties.json
+- select your source file tab again
+- to build: Shift-Ctrl-B: choose "gcc build active file"
+- to debug F5: choose "C++ (GDB/LLDB)", choose "gcc build and debug active file"
+The tool selections are stored in .vscode/tasks.json
+You can now set breakpoints into source file and start debugging the code (F5).
+
+### Project setup (multiple source files)
+
+You would need to set up make or CMake project for this. Easiest way to go is to copy .vscode/tasks.json configuration (and possibly other files) from an other existing project.
+
+### Lab exercise
+
+Set up tasks.json and launch.json for lab1 and check that you can build the code with ctrl-shift-B and debug it using F5 (you need to set a breakpoint in the code before debugging, otherwise it just runs through)
