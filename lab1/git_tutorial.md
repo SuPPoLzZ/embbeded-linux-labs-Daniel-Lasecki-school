@@ -1,3 +1,6 @@
+
+# This is necessary only if you are new to git and gitlab!!!
+
 # Git tutorial
 
 ## Git overview

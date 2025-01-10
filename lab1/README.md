@@ -19,11 +19,11 @@ For Embedded Linux lab works you need to have
 
 ### Step 1: Install VM
 
-Download VM image from emblab ftp server ftp://172.27.0.40/Embedded-Linux/raspi-cross-emblab.ova (for this you need to be connected to lab Ethernet socket). Just copy the URL to Windows File Manager address bar. Browsers do not support insecure ftp any more.
+Download VM image from emblab ftp server ftp://172.27.0.40/Embedded-Linux/raspi-cross-emblab-2025.ova (for this you need to be connected to lab Ethernet socket). Just copy the URL to Windows File Manager address bar. Browsers do not support insecure ftp any more.
 Import VM to VirtualBox.
 Modify configuration:
-- "Bridged" network is recommended. You need to attach the bridge to your Ethernet network interface card.
-- Check the amount of CPU cores and memory allocated for the VM. 2 cores + 2GB RAM should do, but double that amount is better.
+- "Bridged" network is required. You need to attach the bridge to your Ethernet network interface card.
+- Check the amount of CPU cores and memory allocated for the VM. 4 cores + 4GB RAM should do, but double that amount is better.
 - VM user/passwd is student/student
 Check that you can start the VM, log in and have Ubuntu desktop running with internet connectivity.
 
@@ -55,14 +55,9 @@ The installed VM is naturally the same for all students, but will want to use yo
 ```bash
    student@student-VirtualBox:~$ git clone git@git.dc.turkuamk.fi:YOUR-NAMESPACE/embedded-linux-labs.git
 ```
-If gitlab asks for credentials, then your SSH keys setting has failed.  
+(you find the namespace of your project in gitlab web view under blue "code" button). If gitlab asks for credentials, then your SSH keys setting has failed.  
 You should now have a local git repository containing all lab assignments and files, linked to a private remote repository in TUAS gitlab. 
 
-### Step 5: git
-
-All your lab work will end up in your git repository, so it is necessary develop git skills as well.  
-Check the material and exercises [on this page](git_tutorial.md)
-
-### Step 6: C native compilation
+### Step 5: C native compilation
 
 [continued on next page...](compilation_process.md)
