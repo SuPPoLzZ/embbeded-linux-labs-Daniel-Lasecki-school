@@ -1,9 +1,21 @@
 # embedded-linux-labs
 
+## Prerequisites  
+
+Expected skills for starting this course:
+- git operating skills (as used in oo python course; or similar)
+- C language basics (as from system SW course)
+- Virtual machine operating skills
+
+## Goals
+
+- improved linux command line skills
+- improved C language skills
+- ability to build and debug linux application software in cross-compile environment
+- can connect devices to RasPi and control them with software
+- learn strengths and limitations of embedded linux [in new product development context](product-development-context.md)
 
 ## Student instructions
-
-New to git? Please remember to take TUAS git online course!!!
 
 1. Install course VM (you need to have VirtualBox installed).
 2. <b>Fork</b> this repository so that you have your own exact replica with write permissions.
