@@ -13,7 +13,7 @@ Expected skills for starting this course:
 - improved C language skills
 - ability to build and debug linux application software in cross-compile environment
 - can connect devices to RasPi and control them with software
-- learn strengths and limitations of embedded linux [product-developmet-context.md](in new product development context)
+- learn strengths and limitations of embedded linux [in new product development context](product-development-context.md)
 
 ## Student instructions
 
