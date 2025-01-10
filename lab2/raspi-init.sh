@@ -51,7 +51,7 @@ fi
 # See output in raspi /var/log/auth.log to see which auth method was accepted.
 #
 printf "Checking pi ssh login... "
-pi_auth_log=$(sshpass -p $passwd ssh -o "StrictHostKeyChecking no" $username@$ipaddr 'journalctl -t sshd | grep -a "Accepted" | tail -1')
+pi_auth_log=$(sshpass -p $passwd ssh -o "StrictHostKeyChecking no" $username@$ipaddr 'sudo journalctl -t sshd | grep -a "Accepted" | tail -1')
 if test "$?" != "0"; then
     echo -e "${RED}Error: failed to login to raspi!!!"
     echo "Check username and passwd."
@@ -140,7 +140,7 @@ if [ -n "$pi_auth_pass" ]; then
         while read -r ktype key comment; do
             if ! (grep -Fw "$ktype $key" ~/.ssh/authorized_keys | grep -qsvF "^#"); then
                 echo "Adding host key to raspi ~/.ssh/authorized_keys"
-                echo "$ktype $key $comment" >> ~/.ssh/authorized_keys
+                echo "$ktype $key $comment" > ~/.ssh/authorized_keys
             else
                 echo "Host key already listed in ~/.ssh/authorized_keys"
            fi
@@ -173,8 +173,8 @@ TOOLCHAINVERSION=armv8-rpi3-linux-gnueabihf
 LIBSTDVERSION=6.0.32
 
 printf "Install stdlibc++  to raspi ... "
-sudo scp -q ~/opt/x-tools/$TOOLCHAINVERSION/$TOOLCHAINVERSION/sysroot/lib/libstdc++.so.$LIBSTDVERSION  $username@$ipaddr:~
-ssh $username@$ipaddr bash << 'EOF'
+scp -q ~/opt/x-tools/$TOOLCHAINVERSION/$TOOLCHAINVERSION/sysroot/lib/libstdc++.so.$LIBSTDVERSION  "$username@$ipaddr:~"
+ssh "$username@$ipaddr" bash << 'EOF'
   LIBSTDVERSION=6.0.32
   sudo mkdir -p /usr/local/lib/arm-linux-gnueabihf
   sudo cp libstdc++.so.$LIBSTDVERSION /usr/local/lib/arm-linux-gnueabihf/
@@ -200,10 +200,12 @@ LC_ALL=en_GB.UTF-8
 LANG=en_GB.UTF-8
 EOF'"
 
-pi_hostname=$(ssh $username@$ipaddr 'DEBIAN_FRONTEND=noninteractive sudo apt-get update && sudo apt-get -y upgrade')
-if test "$?" != "0"; then
-    echo -e "${RED}Error: failed to run update cmd on raspi!!!"
-    exit 1;
+ssh "$username@$ipaddr" "DEBIAN_FRONTEND=noninteractive sudo apt-get update -qq && sudo apt-get -y upgrade -qq" 2>&1 | tee raspi-init.log
+
+# Check the exit status
+if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+    echo -e "${RED}Error: failed to run update cmd on Raspberry Pi!!!"
+    exit 1
 fi
 printf "OK\n"
 
