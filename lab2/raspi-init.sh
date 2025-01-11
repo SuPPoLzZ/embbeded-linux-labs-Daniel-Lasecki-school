@@ -140,7 +140,7 @@ if [ -n "$pi_auth_pass" ]; then
         while read -r ktype key comment; do
             if ! (grep -Fw "$ktype $key" ~/.ssh/authorized_keys | grep -qsvF "^#"); then
                 echo "Adding host key to raspi ~/.ssh/authorized_keys"
-                echo "$ktype $key $comment" > ~/.ssh/authorized_keys
+                echo "$ktype $key $comment" >> ~/.ssh/authorized_keys
             else
                 echo "Host key already listed in ~/.ssh/authorized_keys"
            fi
@@ -156,7 +156,7 @@ sshconf_exist=$(cat ~/.ssh/config | grep "HostName $pi_hostname.local")
 if [ -n "$sshconf_exist" ]; then
     printf "OK, config was there already.\n"
 else
-    cat >> ~/.ssh/config << EOF
+    cat > ~/.ssh/config << EOF
 Host rpi
     HostName $ipaddr
     User $username
