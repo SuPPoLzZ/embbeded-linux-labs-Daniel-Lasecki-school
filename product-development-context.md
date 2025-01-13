@@ -2,6 +2,58 @@
 
 This page aims to clarify when to use embedded linux as system platform, what are the key alternatives and how the decision making process is supposed to happen.  
 
+## Device Type and OS Selection (Bare-Metal, RTOS, Linux)
+
+The choice between bare-metal, RTOS, or Linux depends on the complexity, real-time requirements, power constraints, and cost of the IoT device.
+
+1. **Bare-Metal (No OS)**
+- Use Case:
+  - Ultra-low-power, resource-constrained devices.
+  - Simple IoT devices with basic functionality (e.g., sensors, simple actuators).
+- Pros:
+  - Minimal overhead.
+  - Fast boot time.
+  - Very low power consumption.
+  - Total control over hardware.
+- Cons:
+  - Difficult to manage complexity.
+  - No multitasking.
+  - Harder to update/maintain.
+- Examples:
+  - Temperature sensors, motion detectors, humidity sensors.
+2. **RTOS (Real-Time Operating System)**
+- Use Case:
+  - Devices requiring real-time behavior with predictable timing.
+  - Slightly more complex IoT devices (e.g., gateways, industrial controllers).
+- Pros:
+  - Deterministic, real-time behavior.
+  - Task scheduling and multitasking.
+  - Power-efficient.
+  - Easier to manage than bare-metal for complex applications.
+- Cons:
+  - Limited memory and processing power.
+  - Can get complex as the system scales.
+- Examples:
+  - FreeRTOS, Zephyr, Mbed OS.
+3. **Linux (or Other Full-Fledged OS)**
+- Use Case:
+  - High-performance edge devices or gateways.
+  - Devices needing a network stack, file system, and containers.
+  - AI/ML processing on the edge.
+- Pros:
+  - Full-featured, with access to drivers and libraries.
+  - Easier development with a broad ecosystem.
+  - Can run containers for modular, scalable software (e.g., Docker).
+- Cons:
+  - Higher power consumption.
+  - Longer boot times.
+  - Requires more resources (CPU, RAM, storage).
+- Examples:
+  - Raspberry Pi, Yocto-based builds, Ubuntu Core, BalenaOS.
+
+
+## SW platform selection in product development process
+
 Choosing the SW platform is an <b>architectural design decision</b>. Typical architectural decisions in an IoT system 
 - Device OS (baremetal, RTOS, OS)
 - Connectivity decisions (BLE, WiFi, LoRa, 5G, ZigBee etc)
@@ -20,11 +72,11 @@ flowchart LR
     classDef lightblue fill:#dcefff,stroke:#1a73e8,stroke-width:2px,radius:10px;
 ```
 
-## From User Needs to Requirements
+### From User Needs to Requirements
 
 New products are usually spawned from the co-operation between marketing (understanding customer needs) and R&D (understanding technical possibilities). The planned product features and capabilities are documented as Technical Requirement Specification. There are two classes of requirements:
 
-### 1. <b>Functional requirements</b> 
+#### 1. <b>Functional requirements</b> 
 
 Functional requirements define what the system should do — its core functionalities or features. These requirements describe the interactions between the system and its users, external devices, or other systems.
 Characteristics of Functional Requirements
@@ -42,7 +94,7 @@ Example functional requirements:
 | Alert System | The system must send an alert if the temperature exceeds a certain threshold. |
 | Over-the-Air (OTA) Updates | The system must support OTA firmware updates. |
 
-### 2. <b>Non-functional requirements</b> 
+#### 2. <b>Non-functional requirements</b> 
 
 Non-functional requirements define how the system should work — its quality attributes, performance, and operational constraints. These are the underlying characteristics that ensure the system is usable, reliable, and scalable.
 Characteristics of Non-Functional Requirements
@@ -61,7 +113,7 @@ Non-functional Requirement Examples :
 | Availability|The system should have 99.9% uptime.|
 | Interoperability|The IoT device must support integration with third-party services using standard protocols like MQTT and CoAP.|
 
-## From requirements to architecture
+### From requirements to architecture
 
 <b>Non-functional requirements dictate the architecture.</b> The system designer chooses 1-3 most important non-functional requirements and choses the architecture based on those.
 
