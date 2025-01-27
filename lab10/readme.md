@@ -146,10 +146,10 @@ c)    Configure **mqtt in** with your actual raspi ip, to subscribe to topic 
 
 d)    To check that your mqtt in node works ok and is correctly connected to mqtt-simulator that you set up already,
 
-1.     Add a debug node in node-red flow and wire it to mqtt node output,
-2.     Deploy the changes (red button on top-right)
-3.     Choose debug tab on right pane as shown below
-4.     Verify there is new data coming in every 5 seconds (if not, check the previous setup steps)
+1.     Add a debug node in node-red flow and wire it to mqtt node output,  
+2.     Deploy the changes (red button on top-right)  
+3.     Choose debug tab on right pane as shown below  
+4.     Verify there is new data coming in every 5 seconds (if not, check the previous setup steps)  
 
   ![nodered-debug](lab10/Images/nodered-debug.png)
   
