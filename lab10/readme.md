@@ -80,7 +80,7 @@ c)    Edit the simulator configuration  with **nano config/settings.json** co
 ```
 {
     "BROKER_URL": "your-raspi-ip",
-    "BROKER_PORT": "1883",
+    "BROKER_PORT": 1883,
     "TOPICS": [
         {
             "TYPE": "single",
