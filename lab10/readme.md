@@ -26,7 +26,8 @@ curl -fsSL https://raw.githubusercontent.com/SensorsIot/IOTstack/master/install.
 
 b)     Once Raspberry Pi has rebooted, navigate into /IOTstack folder and open stack configuration menu with 
 
- **./menu**
+ **./menu**  
+and continue to `->Build stack<-`
 
 c)    In the menu select the following components:  
 **Grafana**, **InfluxDB**, **Mosquitto**, **Node-RED** and **Portainer-CE**:  
