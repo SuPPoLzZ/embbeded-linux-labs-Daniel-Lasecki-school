@@ -1,0 +1,1 @@
+In embbeded application you would write output to a file because no one is watching the device everyday so it just keeps logs of stuff and often embbeded electronics don't have any monitor to output stuff.
