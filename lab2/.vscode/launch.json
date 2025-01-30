@@ -1,6 +1,7 @@
 {
     "version": "0.3.0",
     "configurations": [
+        
         {
             "name": "Remote GDB Launch (rpi)",
             "type": "cppdbg",

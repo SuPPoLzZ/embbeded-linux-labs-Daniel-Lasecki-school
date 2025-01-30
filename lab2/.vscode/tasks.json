@@ -8,6 +8,27 @@
             "type": "shell",
             "command": "scp ${command:cmake.launchTargetPath} rpi:~",
             "problemMatcher": []
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: armv8-rpi3-linux-gnueabihf-gcc build active file",
+            "command": "/home/student/opt/x-tools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-mfloat-abi=hard"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: /home/student/opt/x-tools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-gcc"
         }
     ]
 }
