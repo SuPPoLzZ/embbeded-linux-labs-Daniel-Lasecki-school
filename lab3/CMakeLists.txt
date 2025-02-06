@@ -11,8 +11,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --sysroot=${RPI_SYSROOT} -H" CACHE INTERNAL 
 set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} --sysroot=${RPI_SYSROOT}" CACHE INTERNAL "" FORCE)
 
 set(SRC_FILES  
-        /home/student/Desktop/embedded-linux-labs-przemyslaw/lab2/LAB3_TEST/src/libgpiod-input.c         
-        /home/student/Desktop/embedded-linux-labs-przemyslaw/lab2/LAB3_TEST/src/libgpiod-led.c
+        /home/student/Desktop/embedded-linux-labs-przemyslaw/lab3/src/libgpiod-input.c         
+        /home/student/Desktop/embedded-linux-labs-przemyslaw/lab3/src/libgpiod-led.c
 ) 
 
 add_executable(lab3 ${SRC_FILES}) 

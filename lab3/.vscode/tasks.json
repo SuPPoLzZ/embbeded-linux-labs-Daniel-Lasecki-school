@@ -1,34 +1,29 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Copy executable (rpi)",
+            "label": "CMake: Build Project",
             "type": "shell",
-            "command": "scp ${command:cmake.launchTargetPath} rpi:~",
-            "problemMatcher": []
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--config",
+                "Debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Builds the project using cmake"
         },
         {
-            "type": "cppbuild",
-            "label": "C/C++: armv8-rpi3-linux-gnueabihf-gcc build active file",
-            "command": "/home/student/opt/x-tools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-gcc",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
-                "-mfloat-abi=hard"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-            "detail": "compiler: /home/student/opt/x-tools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-gcc"
+            "label": "Copy executable (rpi)",
+            "type": "shell",
+            "command": "scp ${workspaceFolder}/build/lab3 pi@172.27.228.45:/home/pi/Desktop/lab3",
+            "problemMatcher": [],
+            "detail": "Copies the built executable to the Raspberry Pi"
         }
     ]
 }
