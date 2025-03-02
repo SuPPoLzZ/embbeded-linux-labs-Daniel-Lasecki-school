@@ -1,11 +1,13 @@
-Open another raspi terminal to tail -f your code output:
+Open another raspi terminal to tail -f your code output
 
 pi@pi:~/Desktop $ tail lab2.log 
 I'm logging 0 ...
 I'm logging 1 ...
 I'm logging 2 ...
 I'm logging 3 ...
----------------
+
+
+
 file path pi:
 
 pi@pi:~ $ find ~ -name "hello"
@@ -60,9 +62,10 @@ student@student-VirtualBox:~/Desktop/embedded-linux-labs/lab2$ sudo find / -name
 /snap/core22/1722/usr/lib/x86_64-linux-gnu/libc.so.6
 
 raspberry:
+
 pi@pi:~/Desktop $ sudo find / -name "libc.so.6" 2>/dev/null
 /usr/lib/arm-linux-gnueabihf/libc.so.6
-pi@pi:~/Desktop $ 
+
 
 ---------------
 
