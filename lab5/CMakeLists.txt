@@ -10,12 +10,14 @@ include_directories(/var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/include/)
 include_directories(/var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/include/arm-linux-gnueabihf/) 
 
 set(SRC_FILES  
-    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab3/src/libgpiod-input.c         
-    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab3/src/libgpiod-led.c
+    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/event_test_with_threads_debounce.c      
+    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/event_test_with_threads.c
+    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/main.c
+    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/event_test_without_threads.c
 ) 
 
 # Define the executable first
-add_executable(lab3 ${SRC_FILES}) 
+add_executable(lab5 ${SRC_FILES}) 
 
 # Then link the libraries
-target_link_libraries(lab3 /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
+target_link_libraries(lab5 /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
