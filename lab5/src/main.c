@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	/* Notify event up to 20 times */
 	i = 0;
 	while (i <= 20) {
-		ret = gpiod_line_event_wait(line, &ts);
+		ret = gpiod_line_event_wait(line, NULL);
 		if (ret < 0) {
 			perror("Wait event notification failed\n");
 			ret = -1;
