@@ -10,10 +10,7 @@ include_directories(/var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/include/)
 include_directories(/var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/include/arm-linux-gnueabihf/) 
 
 set(SRC_FILES  
-    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/event_test_with_threads_debounce.c      
-    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/event_test_with_threads.c
     /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/main.c
-    /home/student/Desktop/embedded-linux-labs-przemyslaw/lab5/src/event_test_without_threads.c
 ) 
 
 # Define the executable first
