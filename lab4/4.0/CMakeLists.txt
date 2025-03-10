@@ -15,5 +15,7 @@ add_executable(lab4.1_LED_OFF src/led_off.c)
 
 
 # Then link the libraries
-target_link_libraries(lab4.1_LED_ON /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
-target_link_libraries(lab4.1_LED_OFF /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
+#target_link_libraries(lab4.1_LED_ON /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
+#target_link_libraries(lab4.1_LED_OFF /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
+target_link_libraries(lab4.1_LED_ON gpiod)
+target_link_libraries(lab4.1_LED_OFF gpiod)

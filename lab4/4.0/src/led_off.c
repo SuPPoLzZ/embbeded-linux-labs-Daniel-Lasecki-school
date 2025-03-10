@@ -17,7 +17,7 @@ void log_message(const char *message){
         fprintf(log_file, "[%s] %s\n", asctime(tm_info), message);  // Write timestamp and message
         fclose(log_file);  
     } else {
-        perror("Failed to open log file");
+        perror("LOG FAILED");
     }
 
 }
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 		goto release_line;
 	}
 	
-    gpiod_line_set_value(line, 1);
+    gpiod_line_set_value(line, 0);
     printf("LED OFF" );
     log_message("LED OFF ");
     sleep(10);
