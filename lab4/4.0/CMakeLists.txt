@@ -10,12 +10,14 @@ include_directories(/var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/include/)
 include_directories(/var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/include/arm-linux-gnueabihf/)
 
 # Define the executable first
-add_executable(lab4.1_LED_ON src/led_on.c)
-add_executable(lab4.1_LED_OFF src/led_off.c)
+add_executable(lab4.0_LED_ON src/led_on.c)
+add_executable(lab4.0_LED_OFF src/led_off.c)
+add_executable(lab4.0_WATER src/pump.c)
 
 
 # Then link the libraries
 #target_link_libraries(lab4.1_LED_ON /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
 #target_link_libraries(lab4.1_LED_OFF /var/lib/schroot/chroots/rpi3-bookworm-armhf/usr/lib/arm-linux-gnueabihf/libgpiod.so) 
-target_link_libraries(lab4.1_LED_ON gpiod)
-target_link_libraries(lab4.1_LED_OFF gpiod)
+target_link_libraries(lab4.0_LED_ON gpiod)
+target_link_libraries(lab4.0_LED_OFF gpiod)
+target_link_libraries(lab4.0_WATER gpiod)

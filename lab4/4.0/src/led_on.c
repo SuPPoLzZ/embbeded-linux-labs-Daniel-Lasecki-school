@@ -53,8 +53,7 @@ int main(int argc, char **argv)
     gpiod_line_set_value(line, 1);
     printf("LED ON");
     log_message("LED ON ");
-    sleep(10);
-	
+
 
 release_line:
 	gpiod_line_release(line);

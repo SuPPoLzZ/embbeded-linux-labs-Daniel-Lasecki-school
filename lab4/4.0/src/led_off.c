@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     gpiod_line_set_value(line, 0);
     printf("LED OFF" );
     log_message("LED OFF ");
-    sleep(10);
+    
 
 	
 
