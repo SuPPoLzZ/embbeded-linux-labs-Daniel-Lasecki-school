@@ -1,0 +1,2 @@
+*/2 * * * * /home/pi/lab4-ledon     // even minutes
+1-59/2 * * * * /home/pi/lab4-ledoff // odd minutes

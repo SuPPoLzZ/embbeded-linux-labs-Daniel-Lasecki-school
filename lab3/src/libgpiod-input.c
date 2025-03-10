@@ -5,8 +5,8 @@
 #ifndef	CONSUMER
 #define	CONSUMER	"Consumer"
 #endif
-
-int main_(int argc, char **argv)
+#if 0
+int main(int argc, char **argv)
 {
 	char *chipname = "gpiochip0";
 	unsigned int line_num = 24;	// GPIO Pin #24
@@ -51,3 +51,6 @@ close_chip:
 end:
 	return 0;
 }
+
+
+#endif
