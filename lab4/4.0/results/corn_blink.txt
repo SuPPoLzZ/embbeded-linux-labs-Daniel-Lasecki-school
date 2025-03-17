@@ -1,6 +1,6 @@
-4.0 LED OFF/ON 
+*/2 * * * * /home/pi/lab4.0_LED_ON // even minutes
+1-59/2 * * * * /home/pi/lab4.0_LED_OFF // odd minutes
+1 * * * * /home/pi/lab4.0_WATER
 
-*/2 * * * * /home/pi/lab4.1_LED_ON   //even minutes
-1-59/2 * * * * /home/pi/lab4.1_LED_OFF //odd minutes
 
 
