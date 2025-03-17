@@ -16,8 +16,9 @@
 
 /* Let's create the global timer objects */
 timer_t firstTimerID;
-timer_t secondTimerID;
-timer_t thirdTimerID;
+//timer_t secondTimerID;
+//timer_t thirdTimerID;
+timer_t fourthTimerID;
 
 /**@brief Common handler for all the timers
  *
@@ -31,10 +32,12 @@ static void timerHandler( int sig, siginfo_t *si, void *uc )
     fp=fopen("/home/pi/timers.log","a");
     if ( *tidp == firstTimerID ) {
     	fprintf (fp, "Timer 1 says hello!\n");
-    } else if ( *tidp == secondTimerID ) {
-    	fprintf (fp, "Timer 2 says hello!\n");
-    } else if ( *tidp == thirdTimerID ) {
-    	fprintf (fp, "Timer 3 says hello!\n");
+    // } else if ( *tidp == secondTimerID ) {
+    // 	fprintf (fp, "Timer 2 says hello!\n");
+    // } else if ( *tidp == thirdTimerID ) {
+    // 	fprintf (fp, "Timer 3 says hello!\n");
+    } else if ( *tidp == fourthTimerID) {
+        fprintf (fp, "TIMER 4 SAYS HELLO WORLD\n");
     }
     fclose(fp);
 }
@@ -89,18 +92,24 @@ int timers_init(void)
 	int err_code;
 
 	//Create some timers
+
 	err_code = makeTimer(&firstTimerID, 5e3, 5e3); //5s
 	if (err_code != 0) {
 		return err_code;
 	}
-	err_code = makeTimer(&secondTimerID, 3e3, 3e3); //3s
-	if (err_code != 0) {
-			return err_code;
-	}
-	err_code = makeTimer(&thirdTimerID, 15e3, 15e3); //15s
-	if (err_code != 0) {
-			return err_code;
-	}
+	// err_code = makeTimer(&secondTimerID, 3e3, 3e3); //3s
+	// if (err_code != 0) {
+	// 		return err_code;
+	// }
+	// err_code = makeTimer(&thirdTimerID, 15e3, 15e3); //15s
+	// if (err_code != 0) {
+	// 		return err_code;
+	// }
+
+    err_code = makeTimer(&fourthTimerID, 1e3, 1e3);
+    if (err_code != 0) {
+        return err_code;
+    }
 
 	return 0;
 
