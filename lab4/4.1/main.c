@@ -23,35 +23,14 @@ int main(void)
     struct tm *tm_info;
     int err_code;
 
-    
-    chip = gpiod_chip_open_by_name(chipname);
-    if (!chip) {
-        printf("Failed to open GPIO chip\n");
-        return -1;
-    }
-
-    
-    line = gpiod_chip_get_line(chip, line_num);
-    if (!line) {
-        printf("Failed to get GPIO line\n");
-        gpiod_chip_close(chip);
-        return -1;
-    }
-
-  
-    ret = gpiod_line_request_output(line, "PWM_Pulse");
-    if (ret < 0) {
-        printf("Failed to request GPIO line as output\n");
-        gpiod_chip_close(chip);
-        return -1;
-    }
-
    
     err_code = timers_init();
     if (err_code != 0) {
         gpiod_chip_close(chip);
         return err_code;
     }
+
+    
 
     while(1) {
         sleep(1);
