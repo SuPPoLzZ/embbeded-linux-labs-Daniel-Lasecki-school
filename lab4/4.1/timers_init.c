@@ -23,7 +23,7 @@ static struct gpiod_chip *chip = NULL;
  *
  * @details
  */
-static int makeTimer(timer_t *timerID, int expire_msec, int interval_msec)
+static int makeTimer(timer_t *timerID, int expire_usec, int interval_usec)
 {
     struct sigevent te;
     struct itimerspec its;
@@ -32,7 +32,7 @@ static int makeTimer(timer_t *timerID, int expire_msec, int interval_msec)
 
     /* Set up signal handler. */
     sa.sa_flags = SA_SIGINFO;
-    sa.sa_sigaction = (interval_msec == 0) ? pulseStopHandler : timerHandler;
+    sa.sa_sigaction = (interval_usec == 0) ? pulseStopHandler : timerHandler;
     sigemptyset(&sa.sa_mask);
 
     if (sigaction(sigNo, &sa, NULL) == -1) {
@@ -49,10 +49,10 @@ static int makeTimer(timer_t *timerID, int expire_msec, int interval_msec)
         return (-1);
     }
 
-    its.it_value.tv_sec = expire_msec / 1000000;  // microseconds to seconds
-    its.it_value.tv_nsec = (expire_msec % 1000000) * 1000; // remaining microseconds to nanoseconds
-    its.it_interval.tv_sec = interval_msec / 1000000;  // microseconds to seconds
-    its.it_interval.tv_nsec = (interval_msec % 1000000) * 1000; // remaining microseconds to nanoseconds
+    its.it_value.tv_sec = expire_usec / 1000000;  // microseconds to seconds
+    its.it_value.tv_nsec = (expire_usec % 1000000) * 1000; // remaining microseconds to nanoseconds
+    its.it_interval.tv_sec = interval_usec / 1000000;  // microseconds to seconds
+    its.it_interval.tv_nsec = (interval_usec % 1000000) * 1000; // remaining microseconds to nanoseconds
 
     if (timer_settime(*timerID, 0, &its, NULL) == -1) {
         printf("Failed to set timer\n");
@@ -69,14 +69,10 @@ static int makeTimer(timer_t *timerID, int expire_msec, int interval_msec)
 static void timerHandler(int sig, siginfo_t *si, void *uc)
 {
     timer_t *tidp;
-    
     tidp = si->si_value.sival_ptr;
-    FILE *fp;
-    int i = 0;
-    while (i < 10)
-    {
-       // Open GPIO chip only once, and store the reference
-        if (!gpio_initialized) {
+
+    // Open GPIO chip only once, and store the reference
+    if (!gpio_initialized) {
         chip = gpiod_chip_open("/dev/gpiochip0"); 
         if (!chip) {
             printf("Failed to open GPIO chip\n");
@@ -93,30 +89,16 @@ static void timerHandler(int sig, siginfo_t *si, void *uc)
         }
         gpio_initialized = 1; // Set the flag to indicate GPIO is initialized
         printf("GPIO line requested as output\n");
-        }
-
-        if (*tidp == firstTimerID) {
-            printf("Setting GPIO line high\n");
-            if (line) {
-                gpiod_line_set_value(line, 0);
-            } else {
-                printf("Error: GPIO line is NULL\n");
-            }
-            makeTimer(&pulseTimerID, 1500, 0); // Create a one-shot timer for 1500 microseconds
-        } 
-
-        i++;
     }
-    
 
-    fp = fopen("/home/pi/timers.log", "a");
-    if (fp) {
-        if (*tidp == firstTimerID) {
-            fprintf(fp, "TIMER 1 SAYS HELLO WORLD\n");
+    if (*tidp == firstTimerID) {
+        printf("Setting GPIO line high\n");
+        if (line) {
+            gpiod_line_set_value(line, 1);
+        } else {
+            printf("Error: GPIO line is NULL\n");
         }
-        fclose(fp);
-    } else {
-        printf("Failed to open log file\n");
+        makeTimer(&pulseTimerID, 1500, 0); // Create a one-shot timer for 1500 microseconds
     }
 }
 
@@ -148,11 +130,10 @@ static void pulseStopHandler(int sig, siginfo_t *si, void *uc)
         printf("GPIO line requested as output\n");
     }
 
+    
     if (line) {
         gpiod_line_set_value(line, 0);
-    } else {
-        printf("Error: GPIO line is NULL\n");
-    }
+    } 
 }
 
 /**@brief Function for the Timer initialization.
@@ -165,7 +146,7 @@ int timers_init(void)
     int err_code;
 
     // Create timers
-    err_code = makeTimer(&firstTimerID, 20000, 20000); // 20ms interval timer
+    err_code = makeTimer(&firstTimerID, 2, 2); // 20ms interval timer
     if (err_code != 0) {
         return err_code;
     }
