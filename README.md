@@ -1,24 +1,46 @@
-# embedded-linux-labs
+# Embedded Linux Labs
 
-## Prerequisites  
+This repository contains lab exercises and materials from my **Embedded Linux course**.  
+It was originally hosted on GitLab and has been mirrored here to my personal GitHub for reference, documentation, and portfolio organization.
 
-Expected skills for starting this course:
-- git operating skills (as used in oo python course; or similar)
-- C language basics (as from system SW course)
-- Virtual machine operating skills
+---
 
-## Goals
+## 📘 Overview
 
-- improved linux command line skills
-- improved C language skills
-- ability to build and debug linux application software in cross-compile environment
-- can connect devices to RasPi and control them with software
-- learn strengths and limitations of embedded linux [in new product development context](product-development-context.md)
+The course focuses on **developing, building, and debugging software for embedded Linux environments**, primarily using the Raspberry Pi and a cross-compilation toolchain.  
+Through these labs, I learned to combine software engineering and hardware interaction in a Linux-based embedded system.
 
-## Student instructions
+---
 
-1. Install course VM (you need to have VirtualBox installed).
-2. <b>Fork</b> this repository so that you have your own exact replica with write permissions.
-3. <b>Clone</b> repository contents into course VM. The VM has cross-compilation tools set up, and vscode as well. 
-4. Work through the lab assignments. Each lab requires code modifications and produces other deliverables like oscilloscope data, and you will need to <b>commit</b> all that to your repository.
-5. Sometimes lab assignments are updated here. You might need to <b>pull</b> updates to your working directory, merge updates with your existing work, and <b>push</b> to your own repository! 
+## 🧠 Goals
+
+- Strengthen **Linux command-line** and **C programming** skills  
+- Learn to **cross-compile** and debug Linux applications  
+- Control hardware peripherals using the **Raspberry Pi**  
+- Understand **embedded Linux system architecture** and toolchains  
+- Evaluate the **strengths and limitations** of embedded Linux for product development
+
+---
+
+## 🧩 Prerequisites
+
+Before starting this course, students were expected to have:
+
+- Basic **Git** skills (as used in the OOP Python course)  
+- Familiarity with **C programming**  
+- Basic understanding of **virtual machines**
+
+---
+
+## ⚙️ Tools & Environment
+
+- **Course VM:** Provided preconfigured with cross-compilation tools and VS Code  
+- **Virtualization Software:** VirtualBox Oracle  
+- **Target Hardware:** Raspberry Pi 4 
+- **Languages:** C, Bash  
+- **Key Tools:** GCC cross-compiler, Git, VS Code, oscilloscope (for hardware validation)
+
+---
+
+## 🗂️ Repository Structure
+
