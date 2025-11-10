@@ -40,7 +40,5 @@ Before starting this course, students were expected to have:
 - **Languages:** C, Bash  
 - **Key Tools:** GCC cross-compiler, Git, VS Code, oscilloscope (for hardware validation)
 
----
 
-## 🗂️ Repository Structure
 
